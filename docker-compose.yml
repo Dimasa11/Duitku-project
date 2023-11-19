@@ -1,0 +1,75 @@
+version: '3'
+services:
+
+  postgresql:
+    container_name: postgresql
+    environment:
+      - POSTGRES_PASSWORD=Rahasia
+      - POSTGRES_DB=duitku
+    networks:
+      - app-network
+    volumes:
+      - "postgres-data:/var/lib/postgresql/data"
+    image: postgres
+
+  duitku-app:
+    container_name: app-duitku
+    depends_on:
+      - postgresql
+    environment:
+      - DB_LOCAL_HOST=postgresql
+      - DB_PORT=5432
+      - APP_PORT=8080
+      - DB_NAME=duitku
+      - DB_USER=postgres
+      - DB_PASSWORD=Rahasia
+    ports:
+      - "8080:8080"
+    build: .
+    networks:
+      - app-network
+
+volumes:
+  postgres-data:
+networks:
+  app-network:
+    driver: bridge
+
+
+
+
+#version: '3'
+#
+#services:
+#  springapp:
+#    image: my-spring
+#    build:
+#      context: ./springapp
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8088:8090"
+#    depends_on:
+#      - database
+#    environment:
+#      APP_PORT: 8090
+#      HOST_DB: database
+#      PORT_DB: 5432
+#      DB_NAME: mydb
+#      USERNAME_DB: postgres
+#      PASSWORD_DB: examplepassword
+#    networks:
+#      - mynetwork
+#
+#  database:
+#    image: postgres:latest
+#    environment:
+#      POSTGRES_DB: mydb
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: examplepassword
+#    ports:
+#      - "5435:5432"
+#    networks:
+#      - mynetwork
+#
+#networks:
+#  mynetwork:

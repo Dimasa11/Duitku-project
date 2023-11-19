@@ -1,0 +1,46 @@
+
+### Register users
+POST http://localhost:8080/api/auth/register/user
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email" : "user@gmail.com",
+  "password": "user",
+  "name": "reza user",
+  "address": "Jalan raya jakarta",
+  "mobilePhone": "083938774"
+}
+
+### Register admin
+POST http://localhost:8080/api/auth/register/admin
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email" : "admin@gmail.com",
+  "password": "admin",
+  "name": "dimas admin",
+  "address": "Jalan serang",
+  "mobilePhone": "08987766"
+}
+
+### LOGIN User
+POST http://localhost:8080/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email" : "user@gmail.com",
+  "password": "user"
+}
+
+### LOGIN Admin
+POST http://localhost:8080/api/auth/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email" : "admin@gmail.com",
+  "password": "admin"
+}
